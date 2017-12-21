@@ -273,7 +273,12 @@ var ReactTags = function (_Component) {
       }
 
       // call method to add
-      this.props.handleAddition(tag);
+      var pass = this.props.handleAddition(tag);
+
+      // if we retuen a false value from props function it doesn't clear the input
+      if (pass === false) {
+        return;
+      }
 
       // reset the state
       this.setState({
@@ -351,6 +356,7 @@ var ReactTags = function (_Component) {
           placeholder: placeholder,
           "aria-label": placeholder,
           onBlur: this.handleBlur,
+          onFocus: this.props.handleInputFocus,
           onChange: this.handleChange,
           onKeyDown: this.handleKeyDown,
           onPaste: this.handlePaste,
@@ -402,6 +408,7 @@ ReactTags.PropTypes = {
   allowDeleteFromEmptyInput: _propTypes2.default.bool,
   handleInputChange: _propTypes2.default.func,
   handleInputBlur: _propTypes2.default.func,
+  handleInputFocus: _propTypes2.default.func,
   minQueryLength: _propTypes2.default.number,
   shouldRenderSuggestions: _propTypes2.default.func,
   removeComponent: _propTypes2.default.func,
