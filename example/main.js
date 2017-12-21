@@ -238,6 +238,11 @@ class App extends React.Component {
   }
 
   handleAddition(tag) {
+    const EMAIL_VALIDATION_REGEX = /^[-a-z0-9~!$%^&*_=+}{'?]+(\.[-a-z0-9~!$%^&*_=+}{'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+    const passRegex = EMAIL_VALIDATION_REGEX.test(tag);
+    if (!passRegex) {
+      return false;
+    }
     let { tags } = this.state;
     this.setState({ tags: [...tags, { id: tags.length + 1, text: tag }] });
   }
@@ -253,6 +258,10 @@ class App extends React.Component {
     this.setState({ tags });
   }
 
+  handleFocus() {
+    console.log("It runs!!!!");
+  }
+
   render() {
     const { tags, suggestions } = this.state;
     return (
@@ -263,6 +272,7 @@ class App extends React.Component {
           handleDelete={this.handleDelete}
           handleAddition={this.handleAddition}
           handleDrag={this.handleDrag}
+          handleInputFocus={this.handleFocus}
         />
       </div>
     );
