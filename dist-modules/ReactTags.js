@@ -394,7 +394,7 @@ var ReactTags = function (_Component) {
   return ReactTags;
 }(_react.Component);
 
-ReactTags.PropTypes = {
+ReactTags.propTypes = {
   placeholder: _propTypes2.default.string,
   labelField: _propTypes2.default.string,
   suggestions: _propTypes2.default.array,
